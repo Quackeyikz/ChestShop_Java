@@ -32,12 +32,14 @@ Alternative Image:
 | ItemsManager      | manager |
 | PlayersManager	| manager |
 | EffectsManager    | manager |
+| EnchantmentsMan.  | manager |
 | ChestShopsManager | manager |
 | Item              | item | 
 | ItemUsable        | item |
 | ItemConsumable	| item |
 | Effect			| effect |
 | Enchantment		| effect |
+| Consequence		| effect |
 | ChestShop		    | chestshop |
 | Player            | player |
 
