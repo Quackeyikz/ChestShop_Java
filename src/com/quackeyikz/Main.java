@@ -1,7 +1,10 @@
+package com.quackeyikz;
+
+import com.quackeyikz.manager.*;
 import java.util.Scanner;
 
 /*
- Total hours spent: 7 hours
+ Total hours spent: 12 hours
  */
 
 public class Main {
@@ -18,7 +21,6 @@ public class Main {
                 Scanner sc = new Scanner(System.in);
                 String input = new String();
 
-                // Player & item	
                 welcomeBanner();
 
                 do {
@@ -33,63 +35,43 @@ public class Main {
                         mainCommands(input);
                         
                 } while (input != "/exit");
+
+                sc.close();
         }
 
         public static void mainCommands(String input) {
                 String args[] = input.split(" ");
                 String cmd = args[0];
                 
+                EnchantmentsManager enchantsManager = new EnchantmentsManager();
+                ItemsManager itemsManager = new ItemsManager();
+                ChestShopsManager chsp = new ChestShopsManager();
+                PlayersManager playersManager = new PlayersManager();
+                
                 switch(cmd){
+                        case "/exit":
+                                System.exit(0);
                         case "/tutorial":
                         case "/help":
                                 tutorial();
                                 break;
                         case "/chestshop":
-                                chestShopCommands(args);
+                                chsp.commands(args);
                                 break;
                         case "/player":
-                                playerCommands(args);
+                                playersManager.commands(args);
                                 break;
                         case "/item":
-                                itemCommands(args);
+                                itemsManager.commands(args);
+                                break;
+                        case "/enchantments":
+                                enchantsManager.commands(args);
                                 break;
                         default:
                                 System.out.println(RED + "   Invalid commands. Please refer to /help for available commands." + RESET);
                 }
         }
-        
-        public static void chestShopCommands(String args[]){
-                // TEST
-                if(args[1] != null){
-                        switch(args[1]){
-                                case "info":
-                                        System.out.println("\n\u001B[1m\u001B[33mChestShop:\u001B[0m A Java terminal program that simulates ChestShop Plugin by Acrobot\n inside a terminal with Minecraft-like command execution. This program is made\n by Quackeyikz or also known as Eyyikz. The program is not advertised, \nnot publicly distributed in plugin website, and for educational purpose only.\n");
-                                        break;
-                                case "create":
-                                        break;
-                                case "remove":
-                                        break;
-                                case "search":
-                                        break;
-                                case "list":
-                                        break;
-                                case "buy":
-                                        break;
-                                case "sell":
-                                        break;
-                                default:
-                        }
-                }       
-        }
-        
-        public static void playerCommands(String args[]){
-        
-        }
-        
-        public static void itemCommands(String args[]){
-        
-        }
-
+ 
         public static void chat(String input) {
                 System.out.println("\n[You] " + input);
                 delay(1000);
@@ -121,7 +103,8 @@ public class Main {
                 String msg[] = {welcome, intro, trade, items, me};
 
                 System.out.println(YELLOW + "+=--------------------------------------------------------------=+");
-                for (String s : msg) {
+                for (String s : msg)
+                {
                         int padding = (65 - s.length()) / 2;
                         System.out.printf("%" + padding + "s%-" + s.length() + "s%" + padding + "s\n", " ", s, " ");
                 }
@@ -136,21 +119,10 @@ public class Main {
                 System.out.println("/exit\t\tTo exit the program.");
                 System.out.println("/chestshop\tCheck all the available commands of ChestShop.");
                 System.out.println("/player\t\tManage available users.");
-                System.out.println("/item\t\tManage items.\n");
+                System.out.println("/item\t\tManage items.");
+                System.out.println("/enchantments\t\tManage enchanting effects.\n");
         }
         
-        public static void tutorialChestShop(){
-                System.out.println("+-------- Chest Shop -------+");
-                System.out.println("/chestshop\t\tTo show this info panel.");
-                System.out.println("/chestshop info\t\tProvide the information about ChestShop.");
-                System.out.println("/chestshop create\t\tCreating a new chest shop.");
-                System.out.println("/chestshop remove [item]\t\tRemove your own shop that sells the item.");
-                System.out.println("/chestshop search [item]\t\tWill list all the shop that sells the specific item.");
-                System.out.println("/chestshop list\t\tWill list all the available shop owned by players.");
-                System.out.println("/chestshop buy [item] [player]\t\tBuy item from a specific player to keep it in the inventory.");
-                System.out.println("/chestshop sell [item]\t\tSell the item to an existing shop, or create a new one.");
-        }
-
         public static void delay(int time) {
                 try {
                         Thread.sleep(time);

@@ -10,6 +10,44 @@
 <project name="ChestShop" default="default" basedir=".">
     <description>Builds, tests, and runs the project ChestShop.</description>
     <import file="nbproject/build-impl.xml"/>
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="main.class" value="com.example.MainApp"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath"/>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="${main.class}" fork="yes">
+            <classpath>
+                <path refid="classpath"/>
+                <pathelement location="${build.dir}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${build.dir}/${ant.project.name}.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+            <zipfileset dir="${lib.dir}" includes="*.jar"/>
+        </jar>
+    </target>
+
     <!--
 
     There exist several targets which are by default empty and which can be 
