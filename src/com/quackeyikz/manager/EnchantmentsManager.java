@@ -45,6 +45,19 @@ public class EnchantmentsManager implements DataManager<Enchantment> {
                                                 System.out.println("   " + e.getDescription());
                                         }
                                         break;
+                                case "search":
+                                        if(args.length > 2 && !args[2].isEmpty()){
+                                                for(Enchantment enchant : enchantmentsList){
+                                                        if(enchant.getName().equalsIgnoreCase(args[2])){
+                                                                return enchant;
+                                                        }
+                                                }
+                                                
+                                                System.out.println("[Enchantment] Enchant not found.");
+                                        }
+                                        else
+                                                System.out.println("/enchantment search [name]");
+                                        break;
                                 case "up":
                                         up();
                                         break;

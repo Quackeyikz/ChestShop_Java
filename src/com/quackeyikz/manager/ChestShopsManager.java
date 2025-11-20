@@ -5,6 +5,7 @@ import com.quackeyikz.chestshop.ChestShop;
 import com.quackeyikz.interfaces.DataManager;
 import com.quackeyikz.item.Item;
 import com.quackeyikz.item.ItemUsable;
+import com.quackeyikz.manager.*;
 import java.sql.*;
 import java.util.List;
 
@@ -28,7 +29,11 @@ public class ChestShopsManager implements DataManager<ChestShop> {
                                         break;
                                 case "create":
                                         try {
-                                                ChestShop cs = new ChestShop(args[2], new Item(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]), args[6]);
+                                                ItemsManager iManager = new ItemsManager();
+                                                String argsBackup[] = new String[3];
+                                                argsBackup[1] = "search";
+                                                argsBackup[2] = args[3];
+                                                ChestShop cs = new ChestShop(args[2], iManager.commands(argsBackup, itemsList), Integer.parseInt(args[4]), Integer.parseInt(args[5]), args[6]);
                                                 this.insert(cs);
                                                 System.out.println("\u001B[33m[ChestShop]\u001B[0m Successfully created a shop!");
                                         }

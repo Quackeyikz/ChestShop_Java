@@ -26,9 +26,7 @@
 
 ## Class List
 
-![UML](http://www.plantuml.com/plantuml/uml/hLXRRzis57xtho3ovCnsazxsO6n6Sp6636uJn0w6eXi2Mc9iBXBbYbGpjsj--qXH4WylYhHbBuR9S_zupk6Xtd61Sr6aoO3VKxR3EKvHb63EJuJ8wReGv2BAs99-9UXuiAKnGH7DeuGC1YKNEjiIBfRRR8U-3H2QC9oIALfAKRPHQof8EaKNybUjegnWOeee4sgrosb4cbNsm4Z-mHNdIv8aSZ55wonB26PgTo9_HetX8RGvHfwUmwUuZNzZPBmR8-DRfT7IjY52MHWU0bz7lDg41YJ3bup6bOmoesGgE9H4kMMSiFdFb4DAG4Ea-FMMyTGMk59Usm9wouHZ2rpMO7cX68eFg551-KLzGag3EQEHo3QRX2ZQiER_tkHCnZZvN10MaN3M2Ae0hn8Z9ZpAwKxGZ44UdGH6autxKyGnQlJtvHkZW1VFIOMLr6mVLBbZ7BEupurnpn2aXPnqmP_VtP58QDp5VaSyJ3M33sTWNo84DFJZQeSoB6gEe9yM1Qvaz70gDortFMHOjCLCf8HLy92_TcSPDmrBmsEu0XYr4CT8wZ8Pryts14gjiW2gRZKIfhaEpqx3UXF63f2IAvBVOLcuvrZWzvZX3SbBj1wZB4qnY_aGruO-_I6Tcg85vUAdrKngMIc-OZSqsVqOo_O2rrJMOYw6Kcm5kKX2175txoYBXnoSvyfsyORZTQ9Rp6F1YT-8LCjjwK1EPSXRChfNjw2T36NxzhB0smtKIGVF6DaMdzLh_bKvQ9bbRTtE3hFjk1T2LlNL8ZL7GChwvbL2w6gVML0QYJ2eBNGNEcreMhMw9jsrUHMGuq2PznKrw2J01iTnrQSSAuQbDTL0FaxY8iThcb2nRpAAcCgUmcPaGQHrXE49q7faLK_9Dk_-ktNPd6mG_aTL7VwgExKHi5CSxBlkMHK2-_2XUrvbHW66LcSwikOzfgpCbz4t6R2WqNTqUhauhs50FwE3tulZuvUddrwc1nRRzNmvNmNuZZs-aBRNhhfVhkVp3o76LmxZn_bYSVbRYFErmtcwk9c7-DuuV5StrrUB8ETRX_FiuqdGnnyTFd0QN9LvNUncUoR56Nb09tcEzoLnDZoqTUW-0SLrh-YKLDC-b5C9tosrI_2Uv53kgjpfbepKquVBfmyKRjv3RVAwupHAKfc8GvnlkBdRGUvQR6Vr722VauK8N2_0CoowkHv88aSBSeePqpEpno4AaUKK9q6Y71tmNWxMQSjDrI31uJGpCjEC5VIu2qwflrcKPGsddP4pxOogQQVK2GIXX9vydk3mfY3BldpNvFkJnC96PU1ATTYRNOobyk3xSqkIdT-Gpa_b7SnadijvKbza3T2_IXgilZ_ZTJJToHboanF-EPaU7ILPX9EjcYhVlddzwgX1yZPU7rYgRfRpQwYgrc9pNPqibv2BxFVq_Yil3lpqBH_JjTygAhFgc-RE0wfdjhIsYSDwSEYT959LODYeyYDCB5F36GoDrV09WoxODyRkTkfVaFr2xhusw_YxERqwSJoASYABuPOoAcGlkOLHcPaHnDGEeQgadjW5BmFmYQWNJC7whO09qZmeQdFXUFHDqpEYrejAgjN_UiUbLTLYVcojT2y-O_Yf2Di_ON9uF4rxqLA1BugyGloPtmfDtjLsrVD3K_npbS6OZx4_J2RwKAlFFPF9tpFutMq0FtPuHEVrLj9BRGxXnGj9qCEwIyga0rMh0KyVMrErwMgfjbK8i4JBMJXhtTIscdLff5bLvz-ipHNfN_-bE-3hHf1brg5Y1j5lL-tHPtKWeJRiYmUPPXP2LZFoD3ZKocsdu3qfZpwh4QuAgJc1TuJ5HPhy0m)
-
-Alternative Image:
+[Alternative Image](./UML_Diagram.png):
 ![UML](./UML_Diagram.png)
 
 
@@ -50,6 +48,13 @@ Alternative Image:
 | Consequence		| effect |
 | ChestShop		    | chestshop |
 | Player            | player |
+
+
+**Relation List:**
+- Composition:  ItemUsable -> Enchantment
+                ChestShop -> Item
+- PLS refer to the UML diagram instead.
+                
 
 
 ### A Mind's Voice

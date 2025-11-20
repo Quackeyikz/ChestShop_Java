@@ -1,5 +1,6 @@
 package com.quackeyikz.manager;
 
+import static com.quackeyikz.Main.effectsList;
 import static com.quackeyikz.Main.enchantmentsList;
 import com.quackeyikz.effect.*;
 import com.quackeyikz.item.*;
@@ -26,7 +27,7 @@ public class ItemsManager implements DataManager<Item> {
                                                 String type = sc.nextLine();
 
                                                 int stackSize = 64;
-                                                Enchantment enchant = null;
+                                                Enchantment enchant = new Enchantment();
 
                                                 if(type.equalsIgnoreCase("usable")){
                                                         System.out.print("Enter item stack size (default: 1): ");
@@ -57,12 +58,49 @@ public class ItemsManager implements DataManager<Item> {
                                                                 }
                                                         }
 
-                                                        itemsList.add(new ItemUsable(name, type, stackSize, durability, enchant));
-                                                } else {
-                                                        itemsList.add(new Item(name, type, stackSize));
+//                                                        itemsList.add(new ItemUsable(name, type, stackSize, durability, enchant));
+                                                        System.out.println("[Item] Successfully added a new usable item!");
+                                                        return new ItemUsable(name, type, stackSize, durability, enchant);
+                                                } 
+                                                else if (type.equalsIgnoreCase("consumable")){
+                                                        System.out.print("Enter item stack size (default: 64): ");
+                                                        stackSize = Integer.parseInt(sc.nextLine().isEmpty() ? "64" : sc.nextLine());
+                                                        
+                                                        System.out.print("Enter effect name & tier (enter to skip): ");
+                                                        String findEffect = sc.nextLine();
+                                                        
+                                                        Effect effect = new Effect();
+
+                                                        if(!findEffect.isEmpty()){
+                                                                String var[] = findEffect.split(" ");
+                                                                for(Effect e : effectsList){
+                                                                        boolean name_check = false;
+                                                                        boolean tier_check = true;
+
+                                                                        if(e.getName().equalsIgnoreCase(var[0]))
+                                                                                name_check = true;
+
+                                                                        if(var.length > 1 && !var[1].isEmpty()){
+                                                                                if(e.getTier() == Integer.parseInt(var[1]))
+                                                                                        tier_check = true;
+                                                                        }
+
+                                                                        if(name_check && tier_check)
+                                                                                effect = e;
+                                                                }
+                                                        }
+                                                        
+//                                                        itemsList.add(new ItemConsumable(name, type, stackSize, effect));
+                                                        System.out.println("[Item] Successfully added a new consumable item!");
+                                                        return new ItemConsumable(name, type, stackSize, effect);
+                                                }
+                                                else {
+//                                                        itemsList.add(new Item(name, type, stackSize));
+                                                        System.out.println("[Item] Successfully added a new item!");
+                                                        return new Item(name, type, stackSize);
                                                 }
 
-                                                System.out.println("[Item] Successfully added a new item!");
+//                                                System.out.println("[Item] Successfully added a new item!");
                                         }
                                         catch (Exception e){
                                                 e.printStackTrace();
@@ -73,6 +111,19 @@ public class ItemsManager implements DataManager<Item> {
                                         for(Item e : itemsList){
                                                 System.out.println("- " + e.getName() + ", x" + e.getStackSize() + " (" + e.getType() + ")");
                                         }
+                                        break;
+                                case "search":
+                                        if(args.length > 2 && !args[2].isEmpty()){
+                                                for(Item item : itemsList){
+                                                        if(item.getName().equalsIgnoreCase(args[2])){
+                                                                return item;
+                                                        }
+                                                }
+                                                
+                                                System.out.println("[Item] Item not found.");
+                                        }
+                                        else
+                                                System.out.println("/item search [name]");
                                         break;
                                 case "up":
                                         this.up();
@@ -146,6 +197,12 @@ public class ItemsManager implements DataManager<Item> {
         }
         
         public void help(){
-        
+                System.out.println("\n+-------- Item Help -------+");
+                System.out.println("/item\t\tto show this help window");
+                System.out.println("/item create\tcreate a new item");
+                System.out.println("/item list\tlist all the created items");
+                System.out.println("/item search\tfind item based on the name");
+                System.out.println("/item up\t\tcreate the 'items' table in database");
+                System.out.println("/item down\tdrop the 'items' table in database\n");
         }
 }

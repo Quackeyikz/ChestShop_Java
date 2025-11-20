@@ -3,6 +3,10 @@ package com.quackeyikz.effect;
 public class Effect extends Consequence {
         private String type;
         
+        public Effect(){
+                this("Saturation", 1, "buff", "Restore hunger bar for the player");
+        }
+        
         public Effect(String name){
                 super(name, 1, "");
                 this.type = "buff";

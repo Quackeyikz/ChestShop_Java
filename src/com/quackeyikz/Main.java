@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- Total hours spent: 14 hours
+ Total hours spent: 16 hours
  */
 
 public class Main {
@@ -91,19 +91,19 @@ public class Main {
                                 break;
                         case "/item":
                                 itemsManager.commands(args, itemsList);
-                                /*
+                                
                                 Item itemTemp = itemsManager.commands(args, itemsList);
                                 if(itemTemp != null){
                                         if(itemTemp instanceof ItemUsable)
-                                                itemsUsableList.add((ItemUsable) itemTemp);
+                                                itemsList.add((ItemUsable) itemTemp);
                                         else if(itemTemp instanceof ItemConsumable)
-                                                itemsConsumableList.add((ItemConsumable) itemTemp);
+                                                itemsList.add((ItemConsumable) itemTemp);
                                         else
                                                 itemsList.add(itemTemp);
                                         
                                         System.out.println("[List] Successfully created an item!");
                                 }
-                                */
+                                
                                 break;
                         case "/enchantment":
                                 enchantsManager.commands(args, enchantmentsList);

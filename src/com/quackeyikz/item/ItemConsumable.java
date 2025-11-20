@@ -2,17 +2,22 @@ package com.quackeyikz.item;
 
 import com.quackeyikz.effect.Effect;
 import com.quackeyikz.interfaces.Usable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemConsumable extends Item implements Usable {
-        List<Effect> effects;
+        List<Effect> effects = new ArrayList<>();
         
         public ItemConsumable(String name){
-                this(name, "Unclassified Consumable Item", new Effect("saturation", 1, "buff", "Regenerate hunger points for player"));
+                this(name, "buff", new Effect());
         }
         
         public ItemConsumable(String name, String type, Effect effect){
-                super(name, type);
+                this(name, type, 64, effect);
+        }
+        
+        public ItemConsumable(String name, String type, int stackSize, Effect effect){
+                super(name, type, stackSize);
                 this.addEffect(effect);
         }
 

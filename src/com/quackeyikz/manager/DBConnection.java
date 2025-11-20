@@ -3,9 +3,9 @@ package com.quackeyikz.manager;
 import java.sql.*;
 
 public class DBConnection {
-        private final static String JDBC = "jdbc:postgresql://localhost:5432/chestshop_db";
-        private final static String USER = "postgres";
-        private final static String PASS = "eyyikzsu";
+        private final static String JDBC = "";
+        private final static String USER = "";
+        private final static String PASS = "";
 
         static {
                 try {

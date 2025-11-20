@@ -3,6 +3,10 @@ package com.quackeyikz.effect;
 public class Enchantment extends Consequence {
         private int expCost;
         
+        public Enchantment(){
+                this("Enchanted", 1, 1, "Base enchanted class");
+        }
+        
         public Enchantment(String name){
                 super(name, 1, "");
                 this.setExpCost(1);

@@ -34,6 +34,25 @@ public class EffectsManager implements DataManager<Effect> {
                                                 System.out.println("   " + e.getDescription());
                                         }
                                         break;
+                                case "search":
+                                        if(args.length > 2 && !args[2].isEmpty()){
+                                                for(Effect effect : effectsList){
+                                                        if(effect.getName().equalsIgnoreCase(args[2])){
+                                                                return effect;
+                                                        }
+                                                }
+                                                
+                                                System.out.println("[Effect] effect not found.");
+                                        }
+                                        else
+                                                System.out.println("/effect search [name]");
+                                        break;
+                                case "up":
+                                        this.up();
+                                        break;
+                                case "down":
+                                        this.down();
+                                        break;
                                 default:
                                         this.help();
                         }
@@ -99,6 +118,7 @@ public class EffectsManager implements DataManager<Effect> {
                 System.out.println("\n+-------- Effects Help -------+");
                 System.out.println("/effect\t\tto show this help window");
                 System.out.println("/effect create\tcreate a new effect");
+                System.out.println("/effect search\tsearch created effect");
                 System.out.println("/effect list\tlist all of the created effect");
                 System.out.println("/effect up\t\tcreate the 'effects' table in database");
                 System.out.println("/effect down\tdrop the 'effects' table in database\n");
