@@ -5,19 +5,59 @@ import com.quackeyikz.interfaces.DataManager;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class EnchantmentsManager implements DataManager<Enchantment> {
-        public void commands(String args[]){
+        public Enchantment commands(String args[], List<Enchantment> enchantmentsList){
+                Scanner sc = new Scanner(System.in);
+                
+                /* ATT LIST
+                private String name;
+                private int tier;
+                private String description;
+                private int expCost;
+                */
+                
                 if(args.length > 1 && !args[1].isEmpty()){
                         switch(args[1]){
+                                case "create":
+                                        try {
+                                                System.out.print("Enter enchantment name: ");
+                                                String eName = sc.nextLine();
+                                                System.out.print("Enter enchantment tier: ");
+                                                int eTier = Integer.parseInt(sc.nextLine());
+                                                System.out.print("Enter enchantment description: ");
+                                                String eDescription = sc.nextLine();
+                                                System.out.print("Enter enchantment exp cost (Default: 1): ");
+                                                int expCost = Integer.parseInt(sc.nextLine());
+
+                                                enchantmentsList.add(new Enchantment(eName, eTier, expCost, eDescription));
+                                                System.out.println("[Enchantment] Successfully added a new enchantment!");
+                                        }
+                                        catch (Exception e){
+                                                e.printStackTrace();
+                                        }
+                                        break;
+                                case "list":
+                                        System.out.println("=========== ENCHANTMENTS LIST ==========");
+                                        for(Enchantment e : enchantmentsList){
+                                                System.out.println("- [" + e.getName() + " " + e.getTier() + "] (Cost: " + e.getExpCost() + ")");
+                                                System.out.println("   " + e.getDescription());
+                                        }
+                                        break;
                                 case "up":
                                         up();
                                         break;
                                 case "down":
                                         down();
                                         break;
+                                default:
+                                        this.help();
                         }
-                }
+                } else
+                        this.help();
+                
+                return null;
         }
         
         @Override
@@ -149,5 +189,14 @@ public class EnchantmentsManager implements DataManager<Enchantment> {
                         new Enchantment("Respiration", 2, 3,"Increases breathing time while underwater"),
                         new Enchantment("Respiration", 3, 5,"Increases breathing time while underwater")
                 );
+        }
+        
+        public void help(){
+                System.out.println("\n+-------- Enchantment Help -------+");
+                System.out.println("/enchantment\t\tto show this help window");
+                System.out.println("/enchantment create\tcreate a new enchantment");
+                System.out.println("/enchantment list\tlist all of the created enchantment");
+                System.out.println("/enchantment up\t\tcreate the 'enchantments' table in database");
+                System.out.println("/enchantment down\tdrop the 'enchantments' table in database\n");
         }
 }

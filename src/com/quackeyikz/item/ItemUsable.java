@@ -10,19 +10,23 @@ public class ItemUsable extends Item implements Usable {
         private Enchantment enchantment;
         
         public ItemUsable(String name){
-                this(name, "Unclassified Usable Item", 150, null);
+                this(name, "Unclassified Usable Item", 1, 150, null);
         }
         
-        public ItemUsable(String name, String type){
-                this(name, type, 150, null);
+        public ItemUsable(String name, String type, int stackSize){
+                this(name, type, 1, 150, null);
         }
         
         public ItemUsable(String name, String type, Enchantment enchantment){
-                this(name, type, 150, enchantment);
+                this(name, type, 1, 150, enchantment);
         }
         
-        public ItemUsable(String name, String type, int durability, Enchantment enchantment){
-                super(name, type);
+        public ItemUsable(String name, String type, int stackSize, int durability){
+                this(name, type, stackSize, durability, null);
+        }
+        
+        public ItemUsable(String name, String type, int stackSize, int durability, Enchantment enchantment){
+                super(name, type, stackSize);
                 this.setDurability(durability);
                 this.setEnchantment(enchantment);
         }

@@ -1,10 +1,16 @@
 package com.quackeyikz;
 
+import com.quackeyikz.chestshop.ChestShop;
+import com.quackeyikz.effect.*;
+import com.quackeyikz.item.*;
 import com.quackeyikz.manager.*;
+import com.quackeyikz.player.Player;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
- Total hours spent: 12 hours
+ Total hours spent: 14 hours
  */
 
 public class Main {
@@ -16,16 +22,23 @@ public class Main {
         public static final String BLUE = "\u001B[34m";
         public static final String PURPLE = "\u001B[35m";
         public static final String CYAN = "\u001B[36m";
+        public static List<Enchantment> enchantmentsList = new ArrayList<>();
+        public static List<Effect> effectsList = new ArrayList<>();
+        public static List<Item> itemsList = new ArrayList<>();
+//        public static List<ItemUsable> itemsUsableList = new ArrayList<>();
+//        public static List<ItemConsumable> itemsConsumableList = new ArrayList<>();
+        public static List<Player> playersList = new ArrayList<>();
+        public static List<ChestShop> chestshopsList = new ArrayList<>();
 
         public static void main(String args[]) {
-                Scanner sc = new Scanner(System.in);
+                Scanner in = new Scanner(System.in);
                 String input = new String();
 
                 welcomeBanner();
 
                 do {
                         System.out.print("> ");
-                        input = sc.nextLine();
+                        input = in.nextLine();
 
                         if (input.charAt(0) != '/') {
                                 chat(input);
@@ -34,9 +47,9 @@ public class Main {
                         
                         mainCommands(input);
                         
-                } while (input != "/exit");
+                } while (!input.equalsIgnoreCase("/exit"));
 
-                sc.close();
+                in.close();
         }
 
         public static void mainCommands(String input) {
@@ -44,6 +57,7 @@ public class Main {
                 String cmd = args[0];
                 
                 EnchantmentsManager enchantsManager = new EnchantmentsManager();
+                EffectsManager effectsManager = new EffectsManager();
                 ItemsManager itemsManager = new ItemsManager();
                 ChestShopsManager chsp = new ChestShopsManager();
                 PlayersManager playersManager = new PlayersManager();
@@ -56,16 +70,60 @@ public class Main {
                                 tutorial();
                                 break;
                         case "/chestshop":
-                                chsp.commands(args);
+                                chsp.commands(args, chestshopsList);
+//                                ChestShop csTemp = chsp.commands(args, chestshopsList);
+                                /* Already handled at /chestshop create
+                                if(csTemp != null){
+                                        chestshopsList.add(csTemp);
+                                        System.out.println("[List] Successfully created chestshop!");
+                                }
+                                */
                                 break;
                         case "/player":
-                                playersManager.commands(args);
+                                playersManager.commands(args, playersList);
+                                /*
+                                Player plTemp = playersManager.commands(args, playersList);
+                                if(plTemp != null){
+                                        playersList.add(plTemp);
+                                        System.out.println("[List] Successfully created a player!");
+                                }
+                                */
                                 break;
                         case "/item":
-                                itemsManager.commands(args);
+                                itemsManager.commands(args, itemsList);
+                                /*
+                                Item itemTemp = itemsManager.commands(args, itemsList);
+                                if(itemTemp != null){
+                                        if(itemTemp instanceof ItemUsable)
+                                                itemsUsableList.add((ItemUsable) itemTemp);
+                                        else if(itemTemp instanceof ItemConsumable)
+                                                itemsConsumableList.add((ItemConsumable) itemTemp);
+                                        else
+                                                itemsList.add(itemTemp);
+                                        
+                                        System.out.println("[List] Successfully created an item!");
+                                }
+                                */
                                 break;
-                        case "/enchantments":
-                                enchantsManager.commands(args);
+                        case "/enchantment":
+                                enchantsManager.commands(args, enchantmentsList);
+                                /*
+                                Enchantment enTemp = enchantsManager.commands(args, enchantmentsList);
+                                if(enTemp != null){
+                                        enchantmentsList.add(enTemp);
+                                        System.out.println("[List] Successfully created an enchantment!");
+                                }
+                                */
+                                break;
+                        case "/effect":
+                                effectsManager.commands(args, effectsList);
+                                /*
+                                Effect efTemp = effectsManager.commands(args);
+                                if(efTemp != null){
+                                        effectsList.add(efTemp);
+                                        System.out.println("[List] Successfully created an effect");
+                                }
+                                */
                                 break;
                         default:
                                 System.out.println(RED + "   Invalid commands. Please refer to /help for available commands." + RESET);
@@ -120,7 +178,8 @@ public class Main {
                 System.out.println("/chestshop\tCheck all the available commands of ChestShop.");
                 System.out.println("/player\t\tManage available users.");
                 System.out.println("/item\t\tManage items.");
-                System.out.println("/enchantments\t\tManage enchanting effects.\n");
+                System.out.println("/enchantment\tManage enchanting effects.");
+                System.out.println("/effect\t\tManage effects that could be applied.\n");
         }
         
         public static void delay(int time) {

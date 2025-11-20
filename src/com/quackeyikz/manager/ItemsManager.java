@@ -1,28 +1,92 @@
 package com.quackeyikz.manager;
 
-import com.quackeyikz.item.Item;
+import static com.quackeyikz.Main.enchantmentsList;
+import com.quackeyikz.effect.*;
+import com.quackeyikz.item.*;
 import com.quackeyikz.interfaces.DataManager;
 import java.sql.*;
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ItemsManager implements DataManager<Item> {
         /*public ItemsManager(){
                 this.up();
         }*/
         
-        public void commands(String args[]){
+        public Item commands(String args[], List<Item> itemsList){
+                Scanner sc = new Scanner(System.in);
+                // add instance type for usable or consumable, diffentiate by /item create
                 if(args.length > 1 && !args[1].isEmpty()){
                         switch(args[1]){
+                                case "create":
+                                        try {
+                                                System.out.print("Enter item name: ");
+                                                String name = sc.nextLine();
+                                                System.out.print("Enter item type (default | usable | consumable): ");
+                                                String type = sc.nextLine();
+
+                                                int stackSize = 64;
+                                                Enchantment enchant = null;
+
+                                                if(type.equalsIgnoreCase("usable")){
+                                                        System.out.print("Enter item stack size (default: 1): ");
+                                                        stackSize = Integer.parseInt(sc.nextLine().isEmpty() ? "1" : sc.nextLine());
+
+                                                        System.out.print("Enter item durability (default: 150): ");
+                                                        int durability = Integer.parseInt(sc.nextLine().isEmpty() ? "150" : sc.nextLine());
+
+                                                        System.out.print("Enter enchantment name & tier (enter to skip): ");
+                                                        String findEnchant = sc.nextLine();
+
+                                                        if(!findEnchant.isEmpty()){
+                                                                String var[] = findEnchant.split(" ");
+                                                                for(Enchantment e : enchantmentsList){
+                                                                        boolean name_check = false;
+                                                                        boolean tier_check = true;
+
+                                                                        if(e.getName().equalsIgnoreCase(var[0]))
+                                                                                name_check = true;
+
+                                                                        if(var.length > 1 && !var[1].isEmpty()){
+                                                                                if(e.getTier() == Integer.parseInt(var[1]))
+                                                                                        tier_check = true;
+                                                                        }
+
+                                                                        if(name_check && tier_check)
+                                                                                enchant = e;
+                                                                }
+                                                        }
+
+                                                        itemsList.add(new ItemUsable(name, type, stackSize, durability, enchant));
+                                                } else {
+                                                        itemsList.add(new Item(name, type, stackSize));
+                                                }
+
+                                                System.out.println("[Item] Successfully added a new item!");
+                                        }
+                                        catch (Exception e){
+                                                e.printStackTrace();
+                                        }
+                                        break;
+                                case "list":
+                                        System.out.println("=========== ITEMS LIST ==========");
+                                        for(Item e : itemsList){
+                                                System.out.println("- " + e.getName() + ", x" + e.getStackSize() + " (" + e.getType() + ")");
+                                        }
+                                        break;
                                 case "up":
                                         this.up();
                                         break;
                                 case "down":
                                         this.down();
                                         break;
+                                default:
+                                        this.help();
                         }
-                }       
+                } else
+                        this.help();
+                
+                return null;
         }
         
         @Override
@@ -79,5 +143,9 @@ public class ItemsManager implements DataManager<Item> {
         @Override
         public Item find(String s){
                 return null;
+        }
+        
+        public void help(){
+        
         }
 }

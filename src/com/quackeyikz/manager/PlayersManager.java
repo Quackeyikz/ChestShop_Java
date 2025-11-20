@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PlayersManager implements DataManager<Player> {
         @Override
-        public void commands(String args[]){
+        public Player commands(String args[], List<Player> playersList){
                 if(args.length > 1 && !args[1].isEmpty()){
                         switch(args[1]){
                                 case "":
@@ -19,7 +19,9 @@ public class PlayersManager implements DataManager<Player> {
                         }
                 } else {
                         help();
-                }       
+                }
+                
+                return null;
         }
         
         @Override

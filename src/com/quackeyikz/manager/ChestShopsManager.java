@@ -1,10 +1,12 @@
 package com.quackeyikz.manager;
 
+import static com.quackeyikz.Main.itemsList;
 import com.quackeyikz.chestshop.ChestShop;
 import com.quackeyikz.interfaces.DataManager;
 import com.quackeyikz.item.Item;
 import com.quackeyikz.item.ItemUsable;
 import java.sql.*;
+import java.util.List;
 
 public class ChestShopsManager implements DataManager<ChestShop> {
         /*public ChestShopsManager(){
@@ -12,7 +14,7 @@ public class ChestShopsManager implements DataManager<ChestShop> {
         }*/
         
         @Override
-        public void commands(String args[]){
+        public ChestShop commands(String args[], List<ChestShop> chestshopsList){
                 if(args.length > 1 && !args[1].isEmpty()){
                         switch(args[1]){
                                 case "info":
@@ -52,7 +54,9 @@ public class ChestShopsManager implements DataManager<ChestShop> {
                         }
                 } else {
                         help();
-                }       
+                }
+                
+                return null;
         }
         
         @Override

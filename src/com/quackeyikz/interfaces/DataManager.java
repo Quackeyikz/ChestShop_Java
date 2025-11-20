@@ -1,7 +1,9 @@
 package com.quackeyikz.interfaces;
 
+import java.util.List;
+
 public interface DataManager<T> {
-        void commands(String a[]);
+        T commands(String a[], List<T> t);
         void up();
         void down();
         void insert(T t);
